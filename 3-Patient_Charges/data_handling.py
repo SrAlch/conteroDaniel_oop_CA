@@ -32,7 +32,7 @@ class DataValidation:
             raise ValueError(f"The zip code {zip} is not a valid one")
 
 
-class Procedure(object):
+class Procedure():
     def __init__(self,
                  procedure_name,
                  procedure_date,
@@ -94,7 +94,7 @@ class Procedure(object):
         del self.procedure_fee
 
 
-class Patient(Procedure):
+class Patient():
     def __init__(self,
                  first_name,
                  mid_name,
@@ -104,135 +104,126 @@ class Patient(Procedure):
                  zip_code,
                  phone_number,
                  emrg_name,
-                 ermg_phone,
-                 procedure_name,
-                 procedure_date,
-                 doctor_assigned,
-                 procedure_fee):
+                 ermg_phone):
 
         data = DataValidation
-        self.first_name = data.nameValidation(self, first_name)
-        self.mid_name = data.nameValidation(self, mid_name)
-        self.last_name = data.nameValidation(self, last_name)
-        self.patient_address = patient_address
-        self.patient_city = data.nameValidation(self, patient_city)
-        self.zip_code = data.zipValidation(self, zip_code)
-        self.phone_number = data.numberValidation(self, phone_number)
-        self.emrg_name = data.nameValidation(self, emrg_name)
-        self.ermg_phone = data.numberValidation(self, ermg_phone)
-        Procedure.__init__(self,
-                           procedure_name,
-                           procedure_date,
-                           doctor_assigned,
-                           procedure_fee)
+        self.__first_name = data.nameValidation(self, first_name)
+        self.__mid_name = data.nameValidation(self, mid_name)
+        self.__last_name = data.nameValidation(self, last_name)
+        self.__patient_address = patient_address
+        self.__patient_city = data.nameValidation(self, patient_city)
+        self.__zip_code = data.zipValidation(self, zip_code)
+        self.__phone_number = data.numberValidation(self, phone_number)
+        self.__emrg_name = data.nameValidation(self, emrg_name)
+        self.__ermg_phone = data.numberValidation(self, ermg_phone)
 
     @property
     def firstName(self):
-        return self.first_name
+        return self.__first_name
 
     @firstName.setter
     def firstName(self, first_name):
-        self.first_name = first_name
+        self.__first_name = first_name
 
     @firstName.deleter
     def firstName(self):
-        del self.first_name
+        del self.__first_name
 
     @property
     def midName(self):
-        return self.mid_name
+        return self.__mid_name
 
     @midName.setter
     def midName(self, mid_name):
-        self.mid_name = mid_name
+        self.__mid_name = mid_name
 
     @midName.deleter
     def midName(self):
-        del self.mid_name
+        del self.__mid_name
 
     @property
     def lastName(self):
-        return self.last_name
+        return self.__last_name
 
     @lastName.setter
     def lastName(self, last_name):
-        self.last_name = last_name
+        self.__last_name = last_name
 
     @lastName.deleter
     def lastName(self):
-        del self.last_name
+        del self.__last_name
 
     @property
     def patientAddress(self):
-        return self.patient_address
+        return self.__patient_address
 
     @patientAddress.setter
     def patientAddress(self, patient_address):
-        self.patient_address = patient_address
+        self.__patient_address = patient_address
 
     @patientAddress.deleter
     def patientAddress(self):
-        del self.patient_address
+        del self.__patient_address
 
     @property
     def patientCity(self):
-        return self.patient_city
+        return self.__patient_city
 
     @patientCity.setter
     def patientCity(self, patient_city):
-        self.patient_city = patient_city
+        self.__patient_city = patient_city
 
     @patientCity.deleter
     def patientCity(self):
-        del self.patient_city
+        del self.__patient_city
 
     @property
     def zipCode(self):
-        return self.zip_code
+        return self.__zip_code
 
     @zipCode.setter
     def zipCode(self, zip_code):
-        self.zip_code = zip_code
+        self.__zip_code = zip_code
 
     @zipCode.deleter
     def zipCode(self):
-        del self.zip_code
+        del self.__zip_code
 
     @property
     def phoneNumber(self):
-        return self.phone_number
+        return self.__phone_number
 
     @phoneNumber.setter
     def phoneNumber(self, phone_number):
-        self.phone_number = phone_number
+        self.__phone_number = phone_number
 
     @phoneNumber.deleter
     def phoneNumber(self):
-        del self.phone_number
+        del self.__phone_number
 
     @property
     def emrgName(self):
-        return self.emrg_name
+        return self.__emrg_name
 
     @emrgName.setter
     def emrgName(self, emrg_name):
-        self.emrg_name = emrg_name
+        self.__emrg_name = emrg_name
 
     @emrgName.deleter
     def emrgName(self):
-        del self.emrg_name
+        del self.__emrg_name
 
     @property
     def ermgPhone(self):
-        return self.ermg_phone
+        return self.__ermg_phone
 
     @ermgPhone.setter
     def ermgPhone(self, ermg_phone):
-        self.ermg_phone = ermg_phone
+        self.__ermg_phone = ermg_phone
 
     @ermgPhone.deleter
     def ermgPhone(self):
-        del self.ermg_phone
+        del self.__ermg_phone
 
 
 try:
