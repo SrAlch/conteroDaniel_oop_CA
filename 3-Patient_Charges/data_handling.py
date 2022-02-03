@@ -31,6 +31,28 @@ class DataValidation:
         else:
             raise ValueError(f"The zip code {zip} is not a valid one")
 
+    def __listCleaner(self, input):
+        output_list = []
+        if isinstance(input, list):
+            checked = []
+            for i in input:
+                if isinstance(i, Procedure):
+                    checked.append(i)
+            output_list = checked
+        elif isinstance(input, Procedure):
+            output_list = [input]
+        return output_list
+
+    def checkProcedureInstance(self, object_list):
+        object_list = self.__listCleaner(object_list)
+        output_list = []
+        for object in object_list:
+            if isinstance(object, Procedure):
+                output_list.append(object)
+            else:
+                raise ValueError("The procedure inputed is not a valid object")
+        return output_list
+
 
 class Procedure():
     def __init__(self,
@@ -39,62 +61,62 @@ class Procedure():
                  doctor_assigned,
                  procedure_fee):
 
-        data = DataValidation
-        self.procedure_name = data.nameValidation(self, procedure_name)
-        self.procedure_date = data.dateValidation(self, procedure_date)
-        self.doctor_assigned = data.nameValidation(self, doctor_assigned)
-        self.procedure_fee = data.numberValidation(self, procedure_fee)
+        self.__data = DataValidation()
+        self.__procedure_name = self.__data.nameValidation(procedure_name)
+        self.__procedure_date = self.__data.dateValidation(procedure_date)
+        self.__doctor_assigned = self.__data.nameValidation(doctor_assigned)
+        self.__procedure_fee = self.__data.numberValidation(procedure_fee)
 
     @property
     def procedureName(self):
-        return self.procedure_name
+        return self.__procedure_name
 
     @procedureName.setter
     def procedureName(self, procedure_name):
-        self.procedure_name = procedure_name
+        self.__procedure_name = self.__data.nameValidation(procedure_name)
 
     @procedureName.deleter
     def procedureName(self):
-        del self.procedure_name
+        del self.__procedure_name
 
     @property
     def procedureDate(self):
-        return self.procedure_date
+        return self.__procedure_date
 
     @procedureDate.setter
     def procedureDate(self, procedure_date):
-        self.procedure_date = procedure_date
+        self.__procedure_date = self.__data.dateValidation(procedure_date)
 
     @procedureDate.deleter
     def procedureDate(self):
-        del self.procedure_date
+        del self.__procedure_date
 
     @property
     def doctorAssigned(self):
-        return self.doctor_assigned
+        return self.__doctor_assigned
 
     @doctorAssigned.setter
     def doctorAssigned(self, doctor_assigned):
-        self.doctor_assigned = doctor_assigned
+        self.__doctor_assigned = self.__data.nameValidation(doctor_assigned)
 
     @doctorAssigned.deleter
     def doctorAssigned(self):
-        del self.doctor_assigned
+        del self.__doctor_assigned
 
     @property
     def procedureFee(self):
-        return self.procedure_fee
+        return self.__procedure_fee
 
     @procedureFee.setter
     def procedureFee(self, procedure_fee):
-        self.procedure_fee = procedure_fee
+        self.__procedure_fee = self.__data.numberValidation(procedure_fee)
 
     @procedureFee.deleter
     def procedureFee(self):
-        del self.procedure_fee
+        del self.__procedure_fee
 
 
-class Patient():
+class Patient:
     def __init__(self,
                  first_name,
                  mid_name,
@@ -104,18 +126,20 @@ class Patient():
                  zip_code,
                  phone_number,
                  emrg_name,
-                 ermg_phone):
+                 ermg_phone,
+                 procedure):
 
-        data = DataValidation
-        self.__first_name = data.nameValidation(self, first_name)
-        self.__mid_name = data.nameValidation(self, mid_name)
-        self.__last_name = data.nameValidation(self, last_name)
+        self.__data = DataValidation()
+        self.__first_name = self.__data.nameValidation(first_name)
+        self.__mid_name = self.__data.nameValidation(mid_name)
+        self.__last_name = self.__data.nameValidation(last_name)
         self.__patient_address = patient_address
-        self.__patient_city = data.nameValidation(self, patient_city)
-        self.__zip_code = data.zipValidation(self, zip_code)
-        self.__phone_number = data.numberValidation(self, phone_number)
-        self.__emrg_name = data.nameValidation(self, emrg_name)
-        self.__ermg_phone = data.numberValidation(self, ermg_phone)
+        self.__patient_city = self.__data.nameValidation(patient_city)
+        self.__zip_code = self.__data.zipValidation(zip_code)
+        self.__phone_number = self.__data.numberValidation(phone_number)
+        self.__emrg_name = self.__data.nameValidation(emrg_name)
+        self.__ermg_phone = self.__data.numberValidation(ermg_phone)
+        self.__procedure = self.__data.checkProcedureInstance(procedure)
 
     @property
     def firstName(self):
@@ -123,7 +147,7 @@ class Patient():
 
     @firstName.setter
     def firstName(self, first_name):
-        self.__first_name = first_name
+        self.__first_name = self.__data.nameValidation(first_name)
 
     @firstName.deleter
     def firstName(self):
@@ -135,7 +159,7 @@ class Patient():
 
     @midName.setter
     def midName(self, mid_name):
-        self.__mid_name = mid_name
+        self.__mid_name = self.__data.nameValidation(mid_name)
 
     @midName.deleter
     def midName(self):
@@ -147,7 +171,7 @@ class Patient():
 
     @lastName.setter
     def lastName(self, last_name):
-        self.__last_name = last_name
+        self.__last_name = self.__data.nameValidation(last_name)
 
     @lastName.deleter
     def lastName(self):
@@ -171,7 +195,7 @@ class Patient():
 
     @patientCity.setter
     def patientCity(self, patient_city):
-        self.__patient_city = patient_city
+        self.__patient_city = self.__data.nameValidation(patient_city)
 
     @patientCity.deleter
     def patientCity(self):
@@ -183,7 +207,7 @@ class Patient():
 
     @zipCode.setter
     def zipCode(self, zip_code):
-        self.__zip_code = zip_code
+        self.__zip_code = self.__data.zipValidation(zip_code)
 
     @zipCode.deleter
     def zipCode(self):
@@ -195,7 +219,7 @@ class Patient():
 
     @phoneNumber.setter
     def phoneNumber(self, phone_number):
-        self.__phone_number = phone_number
+        self.__phone_number = self.__data.numberValidation(phone_number)
 
     @phoneNumber.deleter
     def phoneNumber(self):
@@ -207,7 +231,7 @@ class Patient():
 
     @emrgName.setter
     def emrgName(self, emrg_name):
-        self.__emrg_name = emrg_name
+        self.__emrg_name = self.__data.nameValidation(emrg_name)
 
     @emrgName.deleter
     def emrgName(self):
@@ -219,16 +243,22 @@ class Patient():
 
     @ermgPhone.setter
     def ermgPhone(self, ermg_phone):
-        self.__ermg_phone = ermg_phone
+        self.__ermg_phone = self.__data.numberValidation(ermg_phone)
 
     @ermgPhone.deleter
     def ermgPhone(self):
         del self.__ermg_phone
 
+    @property
+    def procedure(self):
+        return self.__procedure
 
-try:
-    test = Procedure("Physical exam", "15/09/2021", "Dr Jones", "€300")
-except ValueError as e:
-    print(e)
+    @procedure.setter
+    def procedure(self, procedure):
+        self.__procedure = self.__procedure.extend(
+            self.__data.checkProcedureInstance(procedure))
 
-print(test.procedureDate)
+    @procedure.deleter
+    def procedure(self):
+        del self.__procedure
+        self.__procedure = []
