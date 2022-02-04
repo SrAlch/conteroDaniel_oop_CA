@@ -7,25 +7,25 @@ class DataValidation:
         pass
 
     def nameValidation(self, name):
-        regEx_exp = re.match("[A-Za-z\\s]*$", name)
+        regEx_exp = re.match("[A-Za-z-\\s]*$", name)
         if regEx_exp:
             return name
         else:
             raise ValueError(f"The name {name} is not a valid one")
 
     def dateValidation(self, date):
-        clean_date = datetime.strptime(date, '%d/%m/%Y')
+        clean_date = datetime.strptime(date, '%d-%m-%Y')
         return clean_date
 
     def numberValidation(self, number):
-        regEx_exp = re.match("[€+]?[0-9-\\s]*$", number)
+        regEx_exp = re.match("[€+]?[0-9-\\s]*$", str(number))
         if regEx_exp:
             return number
         else:
             raise ValueError(f"The number {number} is not a valid one")
 
     def zipValidation(self, zip):
-        regEx_exp = re.match("[A-Za-z0-9\\s]*$", zip)
+        regEx_exp = re.match("[A-Za-z0-9-\\s]*$", zip)
         if regEx_exp:
             return zip
         else:

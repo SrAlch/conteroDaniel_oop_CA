@@ -20,7 +20,7 @@ VALUES ("Physical exam", 300),
         ("X-Ray", 600),
         ("Blood Test", 100);
 
-INSERT INTO apointment
+INSERT INTO appointment
 VALUES (1, 1, 1, "15-09-2021", "Physical exam"),
         (2, 2, 2, "15-09-2021", "X-Ray"),
         (3, 3, 3, "15-09-2021", "Blood Test");

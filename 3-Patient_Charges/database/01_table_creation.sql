@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS [procedure](
     PRIMARY KEY ([procedure_name])
 );
 
-CREATE TABLE IF NOT EXISTS [apointment](
+CREATE TABLE IF NOT EXISTS [appointment](
     [apointment_id] INT(11) NOT NULL,
     [patient_id]  INT NOT NULL,
     [doctor_id] INT NOT NULL,
