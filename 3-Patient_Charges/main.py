@@ -24,6 +24,10 @@ def getAllPatients(patient_list, procedure):
 
 
 def prmntInfo(patient_obj):
+    '''Format and prints out the passed object bassed on the classes of 
+    Patient and Procedure from data_handling.py
+    '''
+
     print(f"Patient {patient_obj.firstName} {patient_obj.lastName} Data")
     print(f"\t Phone Number: {patient_obj.phoneNumber}")
     print(f"""\t Address: {patient_obj.patientAddress}, \
@@ -49,6 +53,8 @@ contact""")
 
 
 def main():
+    '''Executes main function'''
+
     database = Database()
     connection = database.create_connection(DB_PATH)
     cursor = connection.cursor()

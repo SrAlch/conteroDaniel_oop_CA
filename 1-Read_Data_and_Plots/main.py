@@ -70,6 +70,7 @@ def crtBarChart(axs, numbers, categories, row, column):
 
 
 def main():
+    '''Executes main function'''
 
     data_table = tableGeneration()
     category_filter_table = getValues(data_table, [5, 6])

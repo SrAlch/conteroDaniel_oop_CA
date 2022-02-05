@@ -27,6 +27,8 @@ def getUpdatedDict(org_dict, new_word, number_line):
 
 
 def main():
+    '''Executes main function'''
+
     word_dict = {}
     count = 1
     for lines in fileinput.input([INPUT_FILE_PATH]):
