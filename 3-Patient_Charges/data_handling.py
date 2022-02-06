@@ -7,6 +7,8 @@ class DataValidation:
         pass
 
     def nameValidation(self, name):
+        '''Checks with regular expresions.'''
+
         regEx_exp = re.match("[A-Za-z-\\s]*$", name)
         if regEx_exp:
             return name
@@ -14,10 +16,18 @@ class DataValidation:
             raise ValueError(f"The name {name} is not a valid one")
 
     def dateValidation(self, date):
+        '''Gets the inputed string and trys to match the date patern to return
+         a time object.
+        '''
+
         clean_date = datetime.strptime(date, '%d-%m-%Y')
         return clean_date
 
     def numberValidation(self, number):
+        '''Gets the number frm the input, check that is a number with the
+         allowed symbols and returns a string.
+        '''
+
         regEx_exp = re.match("[€+]?[0-9-\\s]*$", str(number))
         if regEx_exp:
             return number
@@ -25,6 +35,10 @@ class DataValidation:
             raise ValueError(f"The number {number} is not a valid one")
 
     def zipValidation(self, zip):
+        '''Gets the number frm the input, check that is a number with the
+         allowed symbols and returns a string.
+        '''
+
         regEx_exp = re.match("[A-Za-z0-9-\\s]*$", zip)
         if regEx_exp:
             return zip
@@ -32,6 +46,10 @@ class DataValidation:
             raise ValueError(f"The zip code {zip} is not a valid one")
 
     def __listCleaner(self, input):
+        '''Checks if the input is a list with instances or an instance of the
+         class Procedure, then returns a new list with the instances.
+        '''
+
         output_list = []
         if isinstance(input, list):
             checked = []
@@ -44,6 +62,7 @@ class DataValidation:
         return output_list
 
     def checkProcedureInstance(self, object_list):
+        ''''''
         object_list = self.__listCleaner(object_list)
         output_list = []
         for object in object_list:
@@ -55,6 +74,10 @@ class DataValidation:
 
 
 class Procedure():
+    '''Initializes the class Procedure with the needed values. Each one of them
+     is validated on input and on later updates of the value on the decorators.
+    '''
+
     def __init__(self,
                  procedure_name,
                  procedure_date,
@@ -117,6 +140,10 @@ class Procedure():
 
 
 class Patient:
+    '''Initializes the class Patient with the needed values. Each one of them
+     is validated on input and on later updates of the value on the decorators.
+    '''
+
     def __init__(self,
                  first_name,
                  mid_name,

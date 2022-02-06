@@ -9,6 +9,7 @@ class Database:
         pass
 
     def create_connection(self, db_path):
+        ''''''
         conn = None
         try:
             conn = sqlite3.connect(db_path)
@@ -19,7 +20,7 @@ class Database:
         return conn
 
     def generateDatabase(self, cursor, sql_path):
-
+        ''''''
         sql_files = [f for f in os.listdir(sql_path) if f.endswith(".sql") and
                      f.startswith("0")]
         for file in sql_files:
@@ -30,21 +31,25 @@ class Database:
             sql_file.close()
 
     def getAppointment(self, cursor):
+        ''''''
         query_string = """SELECT
-        [apointment].[procedure_name],
-        [apointment].[date],
+        [appointment].[patient_id],
+        [appointment].[procedure_name],
+        [appointment].[date],
         [doctor].[doctor_name],
         [procedure].[procedure_fee]
-        FROM apointment
+        FROM appointment
         INNER JOIN [procedure]
-        ON [apointment].[procedure_name] = [procedure].[procedure_name]
+        ON [appointment].[procedure_name] = [procedure].[procedure_name]
         INNER JOIN [doctor]
-        ON [apointment].[doctor_id] = [doctor].[doctor_id]"""
+        ON [appointment].[doctor_id] = [doctor].[doctor_id]"""
         query_result = [list(row) for row in cursor.execute(query_string)]
         return query_result
 
     def getPatients(self, cursor):
+        ''''''
         query_string = """SELECT
+        [patient].[patient_id],
         [patient].[first_name],
         [patient].[mid_name],
         [patient].[last_name],

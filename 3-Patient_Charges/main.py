@@ -9,22 +9,29 @@ SQL_PATH = os.path.join(os.path.dirname(__file__), "database")
 
 
 def getAllProcedures(procedure_list):
+    ''''''
     object_list = []
+    object_dict = {}
     for procedure in procedure_list:
-        object_list.append(Procedure(*procedure))
-    return object_list
+        object_list.append([procedure[0], Procedure(*procedure[1:])])
+    for obj in object_list:
+        object_dict.setdefault(obj[0], []).append(obj[1])
+    return object_dict
 
 
 def getAllPatients(patient_list, procedure):
+    ''''''
     object_list = []
     for patient in patient_list:
-        patient.append(procedure)
+        procedure_list = procedure[patient[0]]
+        patient.pop(0)
+        patient.append(procedure_list)
         object_list.append(Patient(*patient))
     return object_list
 
 
 def prmntInfo(patient_obj):
-    '''Format and prints out the passed object bassed on the classes of 
+    '''Format and prints out the passed object bassed on the classes of
     Patient and Procedure from data_handling.py
     '''
 
