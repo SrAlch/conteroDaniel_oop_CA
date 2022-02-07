@@ -13,7 +13,7 @@ OUTPUT_FILE_PATH = os.path.join(os.path.dirname(__file__),
 def getUpdatedDict(org_dict, new_word, number_line):
     '''From the given dictionary search for the new_word as a key. If exists
     adds the line number to the list, if not creates new key with the line as
-    value
+    value.
     '''
 
     if new_word in org_dict:

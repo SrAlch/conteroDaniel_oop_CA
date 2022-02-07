@@ -9,18 +9,20 @@ class Database:
         pass
 
     def create_connection(self, db_path):
-        ''''''
+        '''Creates and object with the connection to the database.'''
         conn = None
         try:
             conn = sqlite3.connect(db_path)
-            print("Connection to SQLite DB successful")
+            print(f"Connection to {os.path.basename(db_path)} successful")
         except Error as e:
             print(f"The error '{e}' occurred")
 
         return conn
 
     def generateDatabase(self, cursor, sql_path):
-        ''''''
+        '''With the current connection to DB, gets all files from folder and
+         run them as string querys againts the DB.
+        '''
         sql_files = [f for f in os.listdir(sql_path) if f.endswith(".sql") and
                      f.startswith("0")]
         for file in sql_files:
@@ -31,7 +33,10 @@ class Database:
             sql_file.close()
 
     def getAppointment(self, cursor):
-        ''''''
+        '''Uses the query to get a list of list with each row of the table
+         queried.
+         '''
+
         query_string = """SELECT
         [appointment].[patient_id],
         [appointment].[procedure_name],
@@ -47,7 +52,10 @@ class Database:
         return query_result
 
     def getPatients(self, cursor):
-        ''''''
+        '''Uses the query to get a list of list with each row of the table
+         queried.
+        '''
+
         query_string = """SELECT
         [patient].[patient_id],
         [patient].[first_name],

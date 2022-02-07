@@ -9,7 +9,10 @@ SQL_PATH = os.path.join(os.path.dirname(__file__), "database")
 
 
 def getAllProcedures(procedure_list):
-    ''''''
+    '''From the string of SQL query generates a dictionary using the ID as key
+     and appending each new procedure to the dictionary.
+    '''
+
     object_list = []
     object_dict = {}
     for procedure in procedure_list:
@@ -20,7 +23,10 @@ def getAllProcedures(procedure_list):
 
 
 def getAllPatients(patient_list, procedure):
-    ''''''
+    '''Uses user ID to get the right list of appointments and create the
+     Patiente object.
+    '''
+
     object_list = []
     for patient in patient_list:
         procedure_list = procedure[patient[0]]
@@ -32,7 +38,7 @@ def getAllPatients(patient_list, procedure):
 
 def prmntInfo(patient_obj):
     '''Format and prints out the passed object bassed on the classes of
-    Patient and Procedure from data_handling.py
+    Patient and Procedure from data_handling.py.
     '''
 
     print(f"Patient {patient_obj.firstName} {patient_obj.lastName} Data")
@@ -60,7 +66,7 @@ contact""")
 
 
 def main():
-    '''Executes main function'''
+    '''Executes main function.'''
 
     database = Database()
     connection = database.create_connection(DB_PATH)
@@ -69,7 +75,7 @@ def main():
         with connection:
             database.generateDatabase(cursor, SQL_PATH)
     except IntegrityError as e:
-        print(e)
+        print(f"{e}. The Database is being already created")
 
     with connection:
         procedure_list = database.getAppointment(cursor)

@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS [patient](
-    [patient_id] INTEGER PRIMARY KEY AUTOINCREMENT,
+    [patient_id] INTEGER PRIMARY KEY,
     [first_name] VARCHAR(20) NOT NULL,
     [mid_name] VARCHAR(20),
     [last_name] VARCHAR(20) NOT NULL,

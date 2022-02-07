@@ -62,7 +62,10 @@ class DataValidation:
         return output_list
 
     def checkProcedureInstance(self, object_list):
-        ''''''
+        '''Generates a valid list from the inputed object, checks if is a valid
+         procedure and returns the result.
+        '''
+
         object_list = self.__listCleaner(object_list)
         output_list = []
         for object in object_list:
